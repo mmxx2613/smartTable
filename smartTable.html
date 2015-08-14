@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery.smartList-表格插件</title>
+    
+<style type="text/css">
+	html,body{margin:0px;padding:0px;font-family:微软雅黑;font-size:12px;}
+	.main{width:960px;margin:0 auto;}
+	.main>hr{margin-bottom:20px;}
+	
+	/*表格默认样式*/
+	table{border:1px solid #ccc;border-collapse:collapse;}
+	table tr td{border:1px solid #ccc;padding:5px 10px;}
+	table tr th{border:1px solid #ccc;padding:5px 10px;background-color:#BB7744;color:#fff;}
+	table tr td:hover{background-color:#eee;}
+	#delbtn>span:hover{cursor:pointer;}
+	
+	/*容器Div样式 任意修改*/
+	.smartTableDiv{padding:10px;margin:20px auto;}
+</style>
+</head>
+<body>
+<div class="main">
+<h1>jQuery smartTable 示例</h1>
+<hr/>
+<button type="button" onclick="getData()">数据获取</button>
+<label>获取<span style="color:red;"> 第五行 第三列 </span>的值：</label>
+<span id="showResult" style="color:blue">____________</span>
+
+<!-- 表格容器 -->
+<div class="smartTableDiv"></div>
+<div class="smartTableDiv1"></div>
+
+
+</div>
+<script src="jquery-1.7.2.js"></script>
+<script src="jquery.smartTable-2.0.js"></script>
+<script type="text/javascript">
+		var t = {
+			data : [ //表格内json数据,可为空
+				{th:"表头1",td:["肯定不会是我啦", "也不会是我", "是我？你信么" ,"上边那几个好无聊", "别说人家,你也那玩意"]},
+				{th:"表头2",td:["点我点我点我", "楼上的，别吵吵", "是我！（坏笑）" ,"楼上的，别扯淡", "好吧，其实是我","--","我楼上居然是空！"]},
+				{th:"表头3",td:["左边的，点你个头！", "你们都消停点吧", "你们真无聊" ,"是我啦，真不好意思说", "我在这呢，不信你双击修改一下"]},
+				{th:"表头4",td:["真相只有一个", "柯南君？", "！@#%￥…&" ,"敢不敢说点能听懂的", "它只能说一次话", "那我替它说好了"]},
+				{th:"表头5",td:["不好意思，你也浪费机会了", "好吧，我直接说好了", "这几个家伙哪来的" ,"就是，傻不愣登的呢", "雅蠛蝶"]},
+				{th:"表头6",td:["O_O", "5-5真相了", "额。。。" ,"太邪恶了", "为什么我在这些装纯的家伙楼下"]}
+			]
+		};
+
+		$(".smartTableDiv").smartTable({
+			editText:true, //是否可编辑单元格内容
+			editRow :true, //是否可操作单元行，添加或删除
+			addBtnBg:["url(addbtn.png) no-repeat","url(addbtn_hover.png)"],//添加按钮自定义，若覆盖和移除背景相同，两项需写一样的内容
+			delBtnBg:["url(delete.png) 2px 6px no-repeat", "url(delete.png) 2px 6px no-repeat"],//删除按钮自定义
+			tableContent:t.data
+		});
+		
+		function getData(){//示例函数
+			var jsonData = $(".smartTableDiv").smartTable.getData();//调用获取数据接口
+			with(jsonData){
+				$("#showResult").text(jsonData.data[2].td[4]);
+			};
+			//alert(jsonData);
+		};
+</script>
+</body>
+</html>
